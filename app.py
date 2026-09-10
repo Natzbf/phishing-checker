@@ -1,6 +1,6 @@
 import streamlit as st import requests import base64
 st.set_page_config(page_title='Phishing Checker', page_icon='🛡️', layout='centered') st.title('🛡️ أداة فحص الروابط الخبيثة') st.write('قم بوضع الرابط أدناه للتحقق من أمانه مباشرة.')
-جلب المفتاح المسبق الحفظ
+جلب المفتاح المحفوظ في Secrets تلقائياً
 api_key = st.secrets.get("VIRUSTOTAL_API_KEY", "")
 url_to_check = st.text_input('أدخل الرابط للفحص:')
 def check_url(url, api): url_id = base64.urlsafe_b64encode(url.encode()).decode().strip('=') endpoint = f'https://www.virustotal.com/api/v3/urls/{url_id}' headers = {'accept': 'application/json', 'x-apikey': api} return requests.get(endpoint, headers=headers)
